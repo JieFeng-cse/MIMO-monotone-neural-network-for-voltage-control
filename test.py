@@ -1,24 +1,6 @@
 # By Jie Feng, UCSD. This file is used to test the trained controllers.
-import matplotlib.pyplot as plt
 import numpy as np
-from numpy import linalg as LA
-import gym
-import os
-import random
-import sys
-from gym import spaces
-from gym.utils import seeding
-import copy
-
-from scipy.io import loadmat
-import pandapower as pp
-import pandapower.networks as pn
-import pandas as pd 
-import math
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import argparse
 from tqdm import tqdm
 
 from env_13bus import IEEE13bus, create_13bus
@@ -94,20 +76,11 @@ def test_performance():
 
             # execute action a_t and observe reward r_t and observe next state s_{t+1}
             next_state, reward, reward_action,reward_voltage, done = env.step_eval(action)
-            # print(state,action_tmp)
-
-            if(done):
-                state = np.copy(next_state)
-                episode_reward += reward  
-                episodic_action_reward += reward_action
-                episodic_voltage_reward += reward_voltage
-                # break #no break if 13bus3p
-            else:
-                state = np.copy(next_state)
-                episode_reward += reward  
-                episodic_action_reward += reward_action
-                episodic_voltage_reward += reward_voltage
-
+            
+            state = np.copy(next_state)
+            episode_reward += reward  
+            episodic_action_reward += reward_action
+            episodic_voltage_reward += reward_voltage
             last_action = np.copy(action)
 
         rewards.append(episode_reward)

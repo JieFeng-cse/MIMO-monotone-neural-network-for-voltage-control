@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from numpy import linalg as LA
 import random
 import torch.optim as optim
 
